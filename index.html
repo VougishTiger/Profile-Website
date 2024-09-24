@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer type="module" src="/src/main.jsx"></script>
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+
+    <link rel="stylesheet" href="https://api.fontshare.com/css?f[]=satoshi@1,300,301,700&f[]=clash-grotesk@1,200,201,600&f[]=quicksand@1,500,600,700&display=swap">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+    <title>Robin Singh</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Satoshi', sans-serif;
+      }
+
+      body {
+        font-family: 'Satoshi', sans-serif;
+        user-select: none;
+        overflow-x: hidden;
+        background-color: #fbfbf0;
+        color: #2f2f2f;
+        transition: background-color 0.5s, color 0.5s;
+        width:100%;
+      }
+      main {
+        padding:0 2rem;
+      }
+      .dark-mode {
+        background-color: #2f2f2f;
+        color: #f6f6dc;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        z-index:12;
+        position: -webkit-sticky;
+        position: sticky;
+        top:1rem;
+      }
+
+      .top-bar a {
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+        margin-right: 1rem;
+      }
+
+      .top-bar button {
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border: none;
+        background-color: #2f2f2f;
+        color: #f6f6dc;
+        border-radius: 4px;
+      }
+
+      .header {
+        text-align: center;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      .header h1 {
+        font-family: 'Clash Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 60px;
+        margin-bottom: 0.5rem;
+      }
+
+      .nav-bar ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+      }
+
+      .nav-bar li {
+        margin: 0 1rem;
+      }
+
+      .nav-bar a {
+        font-weight: 300;
+        text-decoration: none;
+        color: inherit;
+        font-size: 1.25rem;
+      }
+      .title-section, .subtitle-section {
+        position: relative;
+      }
+      .main-section {
+        padding:  2rem;
+        padding-top:10rem;
+        text-align: center;
+        height:100vh;
+        min-height:100vh;
+        /*
+        */
+      }
+
+      .main-section h2 {
+        font-family: 'Clash Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .main-section p {
+        font-weight: 300;
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      .swiper-container {
+        margin-left: 15%;
+        width: 70%;
+        height: 1%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      .swiper-slide {
+        background-size: cover;
+        background-position: center;
+        & img {
+          width:40%;
+        }
+      }
+
+      .team {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 2rem 1rem;
+      }
+
+      .team-member {
+        flex: 1 1 200px;
+        text-align: center;
+      }
+
+      footer {
+        padding: 2rem 1rem;
+        border-top: 1px solid ;
+        border-color:#2f2f2f;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        position:relative;
+      }
+
+      footer div {
+        flex: 1 1 1 200px;
+        margin-bottom: 1rem;
+      }
+
+      footer h2 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      footer li {
+        margin-bottom: 0.5rem;
+      }
+
+      footer a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+      }
+
+      .dark-mode .top-bar button {
+        background-color: #444;
+      }
+
+      @media (max-width: 767px) {
+        .hamburger {
+          display: block;
+        }
+
+        .nav-bar {
+          display: none;
+        }
+
+        .menu-toggle:checked+.nav-bar {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .header h1 {
+          font-size: 40px;
+        }
+      }
+
+      .toggle-button-cover {
+        display: table-cell;
+        position: relative;
+        box-sizing: border-box;
+        transform:scale(0.45);
+        transform-origin:center right;
+      }
+
+      .button-cover {
+        height: 100px;
+        margin: 20px;
+        background-color: #fff;
+        box-shadow: 0 10px 20px -8px #c5d6d6;
+        border-radius: 4px;
+      }
+
+      .button-cover:before {
+        counter-increment: button-counter;
+        content: counter(button-counter);
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #d7e3e3;
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px;
+      }
+
+      .button-cover,
+      .knobs,
+      .layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .button {
+        position: relative;
+        top: 50%;
+        width: 74px;
+        height: 36px;
+        margin: -20px auto 0 auto;
+        overflow: hidden;
+      }
+
+      .button.r,
+      .button.r .layer {
+        border-radius: 100px;
+      }
+
+      .button.b2 {
+        border-radius: 2px;
+      }
+
+      .checkbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 3;
+      }
+
+      .knobs {
+        z-index: 2;
+      }
+
+      .layer {
+        width: 100%;
+        background-color: #f6f6dc;
+        transition: 0.3s ease all;
+        z-index: 1;
+      }
+      #toggle-button .knobs:before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 20px;
+        height: 10px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1;
+        padding: 9px 4px;
+        background-color: #2f2f2f;
+        border-radius: 50%;
+        transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+      }
+
+      #toggle-button .checkbox:active + .knobs:before {
+        width: 46px;
+        border-radius: 100px;
+      }
+
+      #toggle-button .checkbox:checked:active + .knobs:before {
+        margin-left: -26px;
+      }
+
+      #toggle-button .checkbox:checked + .knobs:before {
+        content: "";
+        left: 42px;
+        background-color: #2f2f2f;
+      }
+
+      #toggle-button .checkbox:checked ~ .layer {
+        background-color: #fcebeb;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <main data-scroll-container class="content" id="top">
+
+      <div class="top-bar">        
+
+        <div>
+          <a class="go" href="#top">Front And Center</a>
+        </div>
+
+        <div id="dark-mode-toggle" class="toggle-button-cover">
+          <div class="button r" id="toggle-button">
+            <input type="checkbox" class="checkbox" />
+            <div class="knobs"></div>
+            <div class="layer"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="header" data-scroll-section>
+
+        <header><h1>Robin Singh</h1></header>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+        <nav class="nav-bar">
+          <ul>
+            <li><a href="#home" data-scroll>Home</a></li>
+            <li><a href="#about" data-scroll>About</a></li>
+            <li><a href="#case-studies" data-scroll>My Frenchies!</a></li>
+            <li><a href="#portfolio" data-scroll>Portfolio</a></li>
+            <li><a href="#contact" data-scroll>Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="home" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Welcome to my profile</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">Where i create ergonomic spaces with individual designs and concepts.</p>
+
+        <div class="swiper-container slider-column">
+          <div class="swiper swiper-slider">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="./images/IMG_4093.jpg" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="./images/IMG_1773.jpg" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="./images/IMG_1899.jpg" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="./images/IMG_2552.jpg" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="./images/IMG_3818.jpg" alt="Swiper">
+              </div>
+            </div>
+          </div>
+          <span class="progressbar"></span>
+        </div>
+      </section>
+
+      <section id="about" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">About Me</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">I am a Full Stack Web Developer with a diverse background that includes military service, heavy equipment operation, and software development. 
+          I possess proven expertise in HTML, CSS, JavaScript, React.js, Vanilla.js, Three.js, Node.js, Python, and PostgreSQL. 
+          As a dedicated and detail-oriented professional, I excel in problem-solving and adapt easily to various environments.
+          After graduating high school, I chose to serve in the U.S. Army, motivated by a strong family tradition of military service.
+          My time in the Army instilled in me invaluable skills and a relentless commitment to excellence. I approach every project with a strong work ethic and a determination to achieve the highest standards. I bring a military perspective to my work, ensuring that I never give up and consistently deliver outstanding results. Iam a huge fan of Led Zeppelin and the New England Patriots.
+          </p>
+          <img src="./images/S2850415_LED_ZEPPELIN_HOUSES_OF_THE_HOLY_WEST_GERMANY_LP_1.jpg" height="40%">
+          <img src="./images/New-England-Patriots-Logo-1972-1988.png" height="25%">
+
+      </section>
+
+      <section id="case-studies" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">My Frenchies!</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">
+          In my home, three beloved French Bulldogs make up my family: Eris, Finn, and Tsunade. 
+          Eris, the matriarch of our little clan, is a playful and affectionate mom who truly embodies the spirit of the breed. 
+          Her sweet nature and gentle demeanor make her an excellent parent, nurturing her puppies with love and care. 
+          Finn, the proud dad, is a charming and spirited fellow, known for his playful antics and loyalty. 
+          Together, they create a wonderful balance in our household, with their personalities perfectly complementing each other.
+          Tsunade, our delightful little character, serves as a loving "parent" to the puppies in a different way. 
+          Though only a older sister, she plays an integral role in the nurturing process. 
+          Her curiosity and gentle temperament provide companionship to the pups, helping them socialize and learn the ropes of being a happy French Bulldog. 
+          Watching the three interact is a joy
+          Eris maternal instincts shine as she teaches her puppies about the world, while Finn's playful energy encourages them to explore and have fun.
+          Each year, I embark on the rewarding journey of breeding, carefully planning the litters to ensure healthy and happy puppies. 
+          I take pride in maintaining the highest standards of care and ethics in my breeding practices. 
+          Eris and Finn are both health-tested and well-loved, and I am dedicated to their well-being, ensuring they receive the best nutrition and veterinary care. 
+          As their puppies come into the world, I’m always amazed by the joy they bring. 
+          The little ones grow up surrounded by love, laughter, and plenty of cuddles, making my home a lively and happy place.
+        </p>
+        <img src="./images/IMG_0732.jpg" >
+      </section>
+
+      <section id="portfolio" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Portfolio</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">Check out my portfolio of recent projects.</p>
+        <h3>Presscss.com!</h3>
+        <p>PressCss is a project my team and i worked on that uses a set of AI datatypes to create a html, css, and javascript template of a website and or application for users that are new to coding or have little to no exprience with it! Use the link bellow to go to our page and simply click create for the application to make you a random page or application, or enter a prompt and watch our program do it's work! Once your code is created simply copy and paste and youre done!</p>
+        <a href="https://www.presscss.com/">www.presscss.com</a>
+
+        <h3>Upcoming Projects!</h3>
+        <ul>
+          <li><h4>Endure: The Lost Realm!</h4></li>
+          <p>A 2d Platformer survival game where you must reach the end of the map as fast as you can while dodging and or fighting the enemies using the special abilities provided to the character!</p>
+          <li><h4>Forbidden Fragrances</h4></li>
+          <p>This is a website for a up coming company based out of NewYork that uses terps in its special recipes to create natural mens colognes. Their fresh new idea bring their aromas to life through their innovation technology!</p>
+        </ul>
+      </section>
+
+
+      <section id="contact" class="main-section" data-scroll-section>
+        <h2 class="title-section"  data-scroll data-scroll-speed="1">Contact Me!</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">Please feel free to contact me at any time for your software devolpment needs!</p>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">(209)509-7238</p>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">vougishtiger187@gmail.com</p>
+      </section>
+
+      <footer data-scroll-section>
+        <div>
+          <h2>Robin</h2>
+          <ul>
+            <li><a href="#">About Me</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Legal</h2>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Social</h2>
+          <ul>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+  </body>
+</html>
